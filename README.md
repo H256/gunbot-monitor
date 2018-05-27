@@ -1,8 +1,17 @@
-# gunbot-monitor [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> gmon - A command line application to monitor your Gunbot
+# gunbot-monitor with websocket
+> gmon - An application to monitor your Gunbot
 
 ![gmon screenshot][gmon-screenshot-image]
 
+
+## Modifications to the original repo:
+
+*** new option ***
+```sh
+    -w, --ws-port                            Port for the WebSocket-Server
+```
+
+### Original Readme
 
 ## 👍 Basics
 

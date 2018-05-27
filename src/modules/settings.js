@@ -5,6 +5,7 @@ const path = require('path');
 
 class Settings {
   constructor() {
+    this._socketPort = 3088;
     this._pathsToGunbot = [{path: './', name: null}];
     this._compact = false;
     this._compactGroupSize = 0;
@@ -73,6 +74,14 @@ class Settings {
         secondsColor: 'red'
       }
     };
+  }
+
+  get wsPort(){
+    return this._socketPort;
+  }
+
+  set wsPort(port){
+    this._socketPort = port;
   }
 
   set pathsToGunbot(paths) {

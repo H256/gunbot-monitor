@@ -30,6 +30,16 @@ class Outputter {
       });
   }
 
+  getJsonData() {
+    Promise.all([osData.getMemoryGauge(), osData.getLoad(), netData.getConnections(), tableData.getTables()])
+    .then(values => {return values;})
+    .catch(error => {
+      console.error(settings.newLine + chalk.red.bold(error) + settings.newLine);
+      this.stop();
+      return false;
+    });
+  }
+
   buildOutput(values) {
     const [memory, load, connections, tableData, error] = values;
     if (error !== undefined) {
@@ -78,7 +88,6 @@ class Outputter {
         }, settings.outputIntervalDelaySeconds * 1000);
       });
   }
-
   stop() {
     clearInterval(this.interval);
   }

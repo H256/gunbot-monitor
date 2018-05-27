@@ -8,9 +8,11 @@ const chalk = require('chalk');
 const settings = require('./modules/settings');
 const outputter = require('./modules/outputter');
 const pj = require('../package.json');
+const ws = require('./modules/socket')
 
 program
   .version(pj.version, '-v, --version')
+  .option('-w, --ws-port', 'Websocket Port for emitted events. [Default: 3088]')
   .option('-p, --path <path>', 'Path to the GUNBOT folder. Separate multiple paths with ":" (like: -p /path1:/path2). [Default: current folder]')
   .option('-N, --path-name <name>', 'Optional name for each path to the GUNBOT folder(s). Separate multiple path names with ":" (like: -N Kraken_Bot:Proxy_Mega_Bot). [Default: No path name]')
   .option('-c, --compact [groupSize]', 'Do not draw row lines. Optional set the number of rows after which a line is drawn. [Default: 0]')
@@ -69,6 +71,11 @@ try {
   console.error(chalk.red(''));
   console.error(chalk.red(`Error: ${error.message}`));
   process.exit();
+}
+
+// set websocket port
+if(program.wsPort){
+  settings.wsPort = program.wsPort;
 }
 
 // Enable compact mode.
@@ -191,3 +198,8 @@ if (program.iHaveSentATip) {
 
 // And the magic begins.
 outputter.start();
+
+ws.on('connection', function connection(ws) {
+  console.log("Client connected")
+  outputter.print();
+});

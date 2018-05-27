@@ -5,6 +5,7 @@ const tradePairs = require('./tradePairs');
 const tradePairParser = require('./tradePairParser');
 const formatter = require('./formatter');
 const settings = require('./settings');
+const s = require('./socket');
 
 class TableData {
   parseAvailableTradePairsNames(pathToGunbot) {
@@ -133,6 +134,7 @@ class TableData {
       let result = {};
       let availableBitCoins = {};
       let latestAvailableBitCoinsDate = {};
+      let emitValues = [];
 
       let allPromises = [];
 
@@ -149,6 +151,7 @@ class TableData {
         }
       }
 
+
       Promise.all(allPromises)
         .then(values => {
           let totalBTCValue = 0.0;
@@ -156,8 +159,7 @@ class TableData {
           let totalBoughtPrice = 0.0;
           let totalProfit = 0.0;
           let counter = 0;
-
-          // Values.shift();
+          let tmp = [];
 
           for (let data of values) {
             if (data === undefined || data.lastTimeStamp === undefined) {
@@ -204,7 +206,7 @@ class TableData {
               table.push([]);
             }
             counter++;
-
+            
             table.push([
               formatter.tradePair(data.tradePair, data.market),
               formatter.strategies(data.strategy),
@@ -223,6 +225,13 @@ class TableData {
               formatter.tradesInTimeSlots(data.sells),
               formatter.profit(data.profit)
             ]);
+
+            let tmpDt = data;
+            tmpDt['totalBtcValue'] = totalBTCValue;
+            tmpDt['totalDiffSinceBuy'] = totalDiffSinceBuy;
+            tmpDt['totalBoughtPrice'] = totalBoughtPrice;
+            tmpDt['totalProfit'] = totalProfit;
+            emitValues.push(tmpDt)
           }
 
           const numberOfRows = table.length;
@@ -253,6 +262,13 @@ class TableData {
           result.availableBitCoins = availableBitCoins;
           result.totalBtcInAltCoins = totalBTCValue;
           result.name = pathToGunbot.name;
+          
+          /*if(tmp && tmp !== []){
+            emitValues.push(tmp);
+          }*/
+          // Socket broadcast...
+          s.broadcast(JSON.stringify({message:'pairData',emitValues}));
+          
           resolve(result);
         })
         .catch(error => reject(error));
