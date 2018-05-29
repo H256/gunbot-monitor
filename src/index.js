@@ -10,9 +10,13 @@ const outputter = require('./modules/outputter');
 const pj = require('../package.json');
 const ws = require('./modules/socket')
 
+const express = require('express');
+const app = express();
+const fs = require('fs');
+
 program
   .version(pj.version, '-v, --version')
-  .option('-w, --ws-port', 'Websocket Port for emitted events. [Default: 3088]')
+  .option('-w, --port <port>', 'HTTP and Websocket Port. [Default: 3088]')
   .option('-p, --path <path>', 'Path to the GUNBOT folder. Separate multiple paths with ":" (like: -p /path1:/path2). [Default: current folder]')
   .option('-N, --path-name <name>', 'Optional name for each path to the GUNBOT folder(s). Separate multiple path names with ":" (like: -N Kraken_Bot:Proxy_Mega_Bot). [Default: No path name]')
   .option('-c, --compact [groupSize]', 'Do not draw row lines. Optional set the number of rows after which a line is drawn. [Default: 0]')
@@ -73,9 +77,9 @@ try {
   process.exit();
 }
 
-// set websocket port
-if(program.wsPort){
-  settings.wsPort = program.wsPort;
+// set port
+if(program.port){
+  settings.serverPort = program.port;
 }
 
 // Enable compact mode.
@@ -190,11 +194,22 @@ if (program.connectionsCheckDelay) {
 // If (program.showAllErrors) {
 //   settings.showAllErrors = true;
 // }
-
 // Set whether there is a thank you message.
 if (program.iHaveSentATip) {
   settings.iHaveSentATip = true;
 }
+
+let PORT = settings.serverPort ? settings.serverPort : 3088; 
+
+app.use(express.static(__dirname +'/../web/public'))
+
+/*app.all('*', function(req,res) {
+  res.sendFile('index.html', { root: __dirname +'/../web/public'});
+})*/
+
+let server = app.listen(PORT, function(){
+  console.log("Listening at", server.address().address, server.address().port);
+});
 
 // And the magic begins.
 outputter.start();

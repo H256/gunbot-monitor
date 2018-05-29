@@ -1,12 +1,11 @@
 {
-  "name": "gunbot-monitor",
+  "name": "gunbot-monitor-extended",
   "version": "1.0.6",
-  "description": "Monitors your GUNBOTs",
-  "homepage": "https://github.com/BeerK0in/gunbot-monitor",
+  "description": "Monitors your GUNBOTs with Vue",
+  "homepage": "https://github.com/H256/gunbot-monitor",
   "author": {
-    "name": "BeerK0in",
-    "email": "bk@beer-crypto.com",
-    "url": "https://github.com/BeerK0in"
+    "name": "H256",
+    "url": "https://github.com/H256"
   },
   "files": [
     "src"
@@ -22,7 +21,8 @@
     "bitcoin",
     "gunthy",
     "traiding",
-    "crypto"
+    "crypto",
+    "vue"
   ],
   "scripts": {
     "lint": "eslint . --fix",
@@ -43,8 +43,11 @@
     "cli-table": "0.3.1",
     "clui": "0.3.6",
     "commander": "2.15.1",
+    "express": "^4.16.3",
     "figlet": "1.2.0",
+    "fs": "0.0.1-security",
     "graceful-fs": "4.1.11",
+    "http": "0.0.0",
     "log-update": "2.3.0",
     "node-netstat": "1.4.2",
     "ws": "^5.2.0"
@@ -60,13 +63,6 @@
       "jest": true,
       "node": true
     }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:BeerK0in/gunbot-monitor.git"
-  },
-  "bugs": {
-    "url": "https://github.com/BeerK0in/gunbot-monitor/issues"
   },
   "license": "MIT"
 }

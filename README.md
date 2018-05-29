@@ -8,7 +8,7 @@
 
 *** new option ***
 ```sh
-    -w, --ws-port                            Port for the WebSocket-Server
+    -w, --ws-port   Port for the WebSocket-Server
 ```
 
 ### Original Readme
