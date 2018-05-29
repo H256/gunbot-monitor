@@ -16,7 +16,6 @@ const fs = require('fs');
 
 program
   .version(pj.version, '-v, --version')
-  .option('-w, --port <port>', 'HTTP and Websocket Port. [Default: 3088]')
   .option('-p, --path <path>', 'Path to the GUNBOT folder. Separate multiple paths with ":" (like: -p /path1:/path2). [Default: current folder]')
   .option('-N, --path-name <name>', 'Optional name for each path to the GUNBOT folder(s). Separate multiple path names with ":" (like: -N Kraken_Bot:Proxy_Mega_Bot). [Default: No path name]')
   .option('-c, --compact [groupSize]', 'Do not draw row lines. Optional set the number of rows after which a line is drawn. [Default: 0]')
@@ -75,11 +74,6 @@ try {
   console.error(chalk.red(''));
   console.error(chalk.red(`Error: ${error.message}`));
   process.exit();
-}
-
-// set port
-if(program.port){
-  settings.serverPort = program.port;
 }
 
 // Enable compact mode.
@@ -199,15 +193,8 @@ if (program.iHaveSentATip) {
   settings.iHaveSentATip = true;
 }
 
-let PORT = settings.serverPort ? settings.serverPort : 3088; 
-
 app.use(express.static(__dirname +'/../web/public'))
-
-/*app.all('*', function(req,res) {
-  res.sendFile('index.html', { root: __dirname +'/../web/public'});
-})*/
-
-let server = app.listen(PORT, function(){
+let server = app.listen(3088, function(){
   console.log("Listening at", server.address().address, server.address().port);
 });
 
