@@ -229,6 +229,7 @@ export default {
             item.buyPrice
           );
           item["waitFor"] = self.getMode(item);
+          // calculate this value only, if we have a sell price
           item["baseValue"] =
               item.waitFor === 'sell' && item.coins && item.lastPrice
               ? parseFloat(item.coins) * parseFloat(item.lastPrice)
