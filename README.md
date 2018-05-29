@@ -24,6 +24,9 @@ This will probably not be maintained but I wanted to offer it here for everyone 
 - shell into `./src` and run `node index` followed by your parameters you would set.
 - the developer VueJS application ist located in `./web/gunmon-vue`
 
+If you like this repo, support me by sending a tip to 191hR9AftcrGH2Vb29ogPBoUjFowsvAMrk (BTC)
+and of course, if you want to support Gunbot-Monitor, send a tip to BeerK0in's BTC wallet: 1GJCGZPn6okFefrRjPPWU73XgMrctSW1jT
+
 ### Original Readme
 
 ## 👍 Basics

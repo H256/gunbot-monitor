@@ -2,6 +2,8 @@
 
 > A Vuetify project to monitor your gunbot with BeerK0in's excellent gunbot-monitor.
 
+If you like this, support me by sending BTC Tip to: 191hR9AftcrGH2Vb29ogPBoUjFowsvAMrk
+
 ## Build Setup
 
 ``` bash
