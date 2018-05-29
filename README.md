@@ -19,7 +19,7 @@ This will probably not be maintained but I wanted to offer it here for everyone 
 
 ### usage:
 
-- the webserver and socket will run on port 3088
+- the webserver will run on port 3090 and websocket will run on port 3088
 - change `host` in `./web/public/index.html` according to the host you would use...
 - shell into `./src` and run `node index` followed by your parameters you would set.
 - the developer VueJS application ist located in `./web/gunmon-vue`
