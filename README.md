@@ -4,12 +4,23 @@
 ![gmon screenshot][gmon-screenshot-image]
 
 
+I needed something to display my gunbot monitor without going down into my basement or VNC to my server. 
+So I created this litte thing to host a simple webpage that displays most of gunbot-monitor information in a webpage.
+
+This will probably not be maintained but I wanted to offer it here for everyone :)
+
 ## Modifications to the original repo:
 
 *** new option ***
 ```sh
     -w, --ws-port   Port for the WebSocket-Server
 ```
+
+### usage:
+
+- change `host` and `port` in `./web/public/index.html` according to the host you would use...
+- shell into `./src` and run `node index` followed by your parameters you would set.
+- the developer VueJS application ist located in `./web/gunmon-vue`
 
 ### Original Readme
 
